@@ -1,4 +1,4 @@
-const questions = [
+const questionsList = [
     {
         title: 'Which of the following is not a data type?',
         choices:['Booleans', "Integers", 'Strings', "Lists"],

@@ -1,8 +1,8 @@
 const currentQuestion = 0;
-const timer = questions.length * 5;
+const time = problems.length * 5;
 var timerId;
-const questionsEl = document.getElementById('questions');
-const timerEl = document.getElementById('time');
+const questionsEl = document.getElementById('problems');
+const timerEl = document.getElementById('timer');
 const answersEl = document.getElementById('answers');
 const submitBtn = document.getElementById('submit');
 const startBtn = document.getElementById('start');
@@ -15,40 +15,40 @@ function stopwatch() {
     }
 }
 function startQuiz() {
-    const beginQuiz = document.getElementById('start-quiz');
-    beginQuiz.setAttribute('class', 'hidden');
-    questionList.removeAttribute('class');
+    const startQuizEl = document.getElementById('start-quiz');
+    startQuizEl.setAttribute('class', 'hidden');
+    questionsEl.removeAttribute('class');
     timerId = setInterval(stopwatch, 500);
-    timerEl.textContent = time;
+    timerEl.textContent = timer;
     getQuestion();
 };
 function getQuestion() {
-    const chosenQuestion = questions[currentQuestion];
-    const titleEl = document.getElementById('question-title');
+    const chosenQuestion = questionsList[currentQuestion];
+    const titleEl = document.getElementById('problems');
     titleEl.textContent = chosenQuestion.title;
-    choicesEl.innerHTML= '';
-    for (const i = 0; i < chosenQuestion.choices.length; i++) {
-        const choice = chosenQuestion.choices[i];
-        const choiceSelect = document.createElement('button');
-        choiceSelect.setAttribute('class', 'choice');
-        choiceSelect,setAttribute('value', choice);
-        choiceSelect.textContent = i + 1 + '' + choice;
-        choicesEl.appendChild(choiceSelect);
+    answersEl.innerHTML= '';
+    for (var i = 0; i < chosenQuestion.answers.length; i++) {
+        const answer = chosenQuestion.choices[i];
+        const answerSelect = document.createElement('button');
+        answerSelect.setAttribute('class', 'answers');
+        answerSelect.setAttribute('value', answers);
+        answerSelect.textContent = i + 1 + '' + answers;
+        answersEl.appendChild(answerSelect);
     }
 }
 function select(event) {
     const buttonEl = event.target;
-    if (!buttonEl.matches('choice')){
+    if (!buttonEl.matches('answers')){
         return;
     }
     if (buttonEl.value !== questions[currentQuestion].answer) {
-        time -= 5;
-        if (time < 0 ) {
-            time = 0;
+        timer -= 5;
+        if (timer < 0 ) {
+            timer = 0;
         }
-        timerEl.textContent = time;
+        timerEl.textContent = timer;
         currentQuestion++;
-        if (time <=0 || currentQuestion === questions.length) {
+        if (timer <=0 || currentQuestion === questions.length) {
             endQuiz();
         } else {
             getQuestion();
@@ -76,4 +76,4 @@ function saveScores() {
     winsow.location.href = "leaderboard.html";
 }
 startBtn.onclick = startQuiz;
-choiceSelect.onclick = select;
+answersEl.onclick = select;

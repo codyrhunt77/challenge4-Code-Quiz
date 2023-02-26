@@ -1,0 +1,12 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 100%;
+}
+button {
+    display: inline;
+    margin: auto;
+    cursor: pointer;
+    font-size: 100%;
+    background-color: aqua;
+    color: white;
+}
